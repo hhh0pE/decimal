@@ -15,11 +15,11 @@ Loop:
 		switch tok {
 		case "+":
 			x := stack[last-1]
-			x.Add(x, stack[last])
+			x.add(x, stack[last])
 			stack = stack[:last]
 		case "-":
 			x := stack[last-1]
-			x.Sub(x, stack[last])
+			x.sub(x, stack[last])
 			stack = stack[:last]
 		case "/":
 			x := stack[last-1]
@@ -27,7 +27,7 @@ Loop:
 			stack = stack[:last]
 		case "*":
 			x := stack[last-1]
-			x.Mul(x, stack[last])
+			x.mul(x, stack[last])
 			stack = stack[:last]
 		case "=":
 			break Loop

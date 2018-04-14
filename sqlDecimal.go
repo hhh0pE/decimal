@@ -1,16 +1,23 @@
-package postgres
+package decimal
 
 import (
 	"fmt"
 	"database/sql/driver"
 	"errors"
-	"github.com/hhh0pE/decimal"
+	//"bitbucket.org/trade4crypt/logging"
+	//"reflect"
+	//"go.uber.org/zap"
 )
 
 const (
 	MaxIntegralDigits   = 131072 // max digits before the decimal point
 	MaxFractionalDigits = 16383  // max digits after the decimal point
 )
+
+//var Logger *zap.Logger
+//func init() {
+//	Logger = logging.ModuleLogger("decimal")
+//}
 
 // LengthError is returned from Decimal.Value when either its integral (digits
 // before the decimal point) or fractional (digits after the decimal point)
@@ -25,20 +32,16 @@ func (e LengthError) Error() string {
 	return fmt.Sprintf("%s (%d digits) is too long (%d max)", e.Part, e.N, e.max)
 }
 
-type Decimal struct {
-	decimal.Decimal
-}
-
 
 // Value implements driver.Valuer.
-func (d *Decimal) Value() (driver.Value, error) {
-	if d == nil {
-		return nil, nil
-	}
-	if d.IsNaN(0) {
+func (d Decimal) Value() (driver.Value, error) {
+	//Logger.Debug("Decimal.Value", zap.Reflect("d", d), zap.Stringer("d", d))
+	//checkValue(d)
+	//log.Println("Decimal.Value")
+	if d.b.IsNaN(0) {
 		return "NaN", nil
 	}
-	if d.IsInf(0) {
+	if d.b.IsInf(0) {
 		return nil, errors.New("Decimal.Value: DECIMAL does not accept Infinities")
 	}
 
@@ -56,13 +59,16 @@ func (d *Decimal) Value() (driver.Value, error) {
 
 // Scan implements sql.Scanner.
 func (d *Decimal) Scan(val interface{}) error {
+	//log.Println("Decimal.Scan")
+	//Logger.Debug("Decimal.Scan", zap.Reflect("d", d), zap.Stringer("d", d), zap.Reflect("val", val), zap.Stringer("val", reflect.TypeOf(val)))
 	if d == nil {
-		d.Decimal = decimal.NewDecimal()
+		d = new(Decimal)
 	}
+	//checkValue(d)
 	switch t := val.(type) {
 	case string:
-		if _, ok := d.SetString(t); !ok {
-			if err := d.Context.Err(); err != nil {
+		if _, ok := d.b.SetString(t); !ok {
+			if err := d.b.Context.Err(); err != nil {
 				return err
 			}
 			return fmt.Errorf("Decimal.Scan: invalid syntax: %q", t)
@@ -74,3 +80,34 @@ func (d *Decimal) Scan(val interface{}) error {
 		return fmt.Errorf("Decimal.Scan: unknown value: %#v", val)
 	}
 }
+
+
+type NullDecimal struct {
+	Decimal
+	Valid bool
+}
+
+// Scan implements the Scanner interface.
+func (n *NullDecimal) Scan(value interface{}) error {
+	if value == nil {
+		n.Valid = false
+		return nil
+	}
+	if err := n.Decimal.Scan(value); err != nil {
+		return err
+	} else {
+		n.Valid = true
+		return nil
+	}
+}
+
+// Value implements the driver Valuer interface.
+func (n NullDecimal) Value() (driver.Value, error) {
+	if !n.Valid {
+		return nil, nil
+	}
+	return n.Decimal.Value()
+}
+
+
+

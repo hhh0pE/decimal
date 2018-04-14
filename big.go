@@ -12,9 +12,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ericlagergren/decimal/internal/arith"
-	"github.com/ericlagergren/decimal/internal/arith/checked"
-	"github.com/ericlagergren/decimal/internal/c"
+	"github.com/hhh0pE/decimal/internal/arith"
+	"github.com/hhh0pE/decimal/internal/arith/checked"
+	"github.com/hhh0pE/decimal/internal/c"
 )
 
 // Big is a floating-point, arbitrary-precision decimal.
@@ -279,7 +279,7 @@ func (z *Big) Abs(x *Big) *Big {
 }
 
 // Add sets z to x + y and returns z.
-func (z *Big) Add(x, y *Big) *Big { return z.Context.Add(z, x, y) }
+func (z *Big) add(x, y *Big) *Big { return z.Context.Add(z, x, y) }
 
 // Class returns the ``class'' of x, which is one of the following:
 //
@@ -288,8 +288,8 @@ func (z *Big) Add(x, y *Big) *Big { return z.Context.Add(z, x, y) }
 //  -Infinity
 //  -Normal
 //  -Subnormal
-//  -Zero
-//  +Zero
+//  -Valid
+//  +Valid
 //  +Subnormal
 //  +Normal
 //  +Infinity
@@ -306,7 +306,7 @@ func (x *Big) Class() string {
 			return "-Infinity"
 		}
 		if x.compact == 0 {
-			return "-Zero"
+			return "-Valid"
 		}
 		if x.IsSubnormal() {
 			return "-Subnormal"
@@ -317,7 +317,7 @@ func (x *Big) Class() string {
 		return "+Infinity"
 	}
 	if x.compact == 0 {
-		return "+Zero"
+		return "+Valid"
 	}
 	if x.IsSubnormal() {
 		return "+Subnormal"
@@ -901,8 +901,8 @@ func (x *Big) MarshalText() ([]byte, error) {
 	return b.Bytes(), nil
 }
 
-// Mul sets z to x * y and returns z.
-func (z *Big) Mul(x, y *Big) *Big { return z.Context.Mul(z, x, y) }
+// mul sets z to x * y and returns z.
+func (z *Big) mul(x, y *Big) *Big { return z.Context.Mul(z, x, y) }
 
 // Neg sets z to -x and returns z. If x is positive infinity, z will be set to
 // negative infinity and visa versa. If x == 0, z will be set to zero as well.
@@ -1051,12 +1051,12 @@ func (z *Big) RoundToInt() *Big { return z.Context.RoundToInt(z) }
 // Scale returns x's scale.
 func (x *Big) Scale() int { return -x.exp }
 
-// Scan implements fmt.Scanner.
-func (z *Big) Scan(state fmt.ScanState, verb rune) error {
-	return z.scan(byteReader{state})
-}
+//// Scan implements fmt.Scanner.
+//func (z *Big) Scan(state fmt.ScanState, verb rune) error {
+//	return z.scan(byteReader{state})
+//}
 
-var _ fmt.Scanner = (*Big)(nil)
+//var _ fmt.Scanner = (*Big)(nil)
 
 // Set sets z to x and returns z. The result might be rounded depending on z's
 // Context, and even if z == x.
@@ -1205,7 +1205,7 @@ func (z *Big) SetFloat64(x float64) *Big {
 		z.exp = -shift
 	} else {
 		// TODO(eric): figure out why this doesn't work for _some_ numbers. See
-		// https://github.com/ericlagergren/decimal/issues/89
+		// https://github.com/hhh0pE/decimal/issues/89
 		//
 		// z.compact = mantissa << uint(-shift)
 		// z.precision = arith.Length(z.compact)
@@ -1395,7 +1395,7 @@ func (x *Big) String() string {
 var _ fmt.Stringer = (*Big)(nil)
 
 // Sub sets z to x - y and returns z.
-func (z *Big) Sub(x, y *Big) *Big { return z.Context.Sub(z, x, y) }
+func (z *Big) sub(x, y *Big) *Big { return z.Context.Sub(z, x, y) }
 
 // UnmarshalText implements encoding.TextUnmarshaler.
 func (z *Big) UnmarshalText(data []byte) error {

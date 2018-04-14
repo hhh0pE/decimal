@@ -25,7 +25,7 @@ var urls = [...]string{
 	prefix + "Trailing-And-Leading-Zeros-Input" + suffix,
 	prefix + "Trailing-And-Leading-Zeros-Result" + suffix,
 	prefix + "Clamping" + suffix,
-	prefix + "Mul-Trailing-Zeros" + suffix,
+	prefix + "mul-Trailing-Zeros" + suffix,
 }
 
 func main() {

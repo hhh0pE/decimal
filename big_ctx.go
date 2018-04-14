@@ -4,9 +4,9 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/ericlagergren/decimal/internal/arith"
-	"github.com/ericlagergren/decimal/internal/arith/checked"
-	cst "github.com/ericlagergren/decimal/internal/c"
+	"github.com/hhh0pE/decimal/internal/arith"
+	"github.com/hhh0pE/decimal/internal/arith/checked"
+	cst "github.com/hhh0pE/decimal/internal/c"
 )
 
 // Add sets z to x + y and returns z.
@@ -240,7 +240,7 @@ func (c Context) FMA(z, x, y, u *Big) *Big {
 	return z.setShared(z0)
 }
 
-// Mul sets z to x * y and returns z.
+// mul sets z to x * y and returns z.
 func (c Context) Mul(z, x, y *Big) *Big {
 	if z.invalidContext(c) {
 		return z
@@ -248,7 +248,7 @@ func (c Context) Mul(z, x, y *Big) *Big {
 	return c.round(c.mul(z, x, y))
 }
 
-// mul is the implementation of Mul.
+// mul is the implementation of mul.
 func (c Context) mul(z, x, y *Big) *Big {
 	if debug {
 		x.validate()

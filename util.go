@@ -3,9 +3,9 @@ package decimal
 import (
 	"math/big"
 
-	"github.com/ericlagergren/decimal/internal/arith"
-	"github.com/ericlagergren/decimal/internal/arith/checked"
-	cst "github.com/ericlagergren/decimal/internal/c"
+	"github.com/hhh0pE/decimal/internal/arith"
+	"github.com/hhh0pE/decimal/internal/arith/checked"
+	cst "github.com/hhh0pE/decimal/internal/c"
 )
 
 func (z *Big) norm() *Big {

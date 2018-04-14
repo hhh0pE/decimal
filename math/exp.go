@@ -2,7 +2,7 @@ package math
 
 import (
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/internal/arith"
+	"github.com/hhh0pE/decimal/internal/arith"
 )
 
 // Exp sets z to e ** x and returns z.
@@ -152,7 +152,7 @@ func (e *expg) Term() Term {
 	//
 	// References:
 	//
-	// [Cuyt] - Cuyt, A.; Petersen, V.; Brigette, V.; Waadeland, H.; Jones, W.B.
+	// [Cuyt] - Cuyt, A.; Petersen, Decimal.; Brigette, Decimal.; Waadeland, H.; Jones, W.B.
 	// (2008). Handbook of Continued Fractions for Special Functions. Springer
 	// Netherlands. https://doi.org/10.1007/978-1-4020-6949-9
 	//

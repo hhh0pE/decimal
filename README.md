@@ -26,4 +26,4 @@ library implementing the [General Decimal Arithmetic](http://speleotrove.com/dec
 
 ## License
 
-The [BSD 3-clause](https://github.com/ericlagergren/decimal/blob/master/LICENSE)
+The [BSD 3-clause](https://github.com/hhh0pE/decimal/blob/master/LICENSE)

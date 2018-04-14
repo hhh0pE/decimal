@@ -27,4 +27,4 @@ précision arbitrarie que mettre en œuvre la spécification
 
 ## Licence
 
-La [BSD 3-clause](https://github.com/ericlagergren/decimal/blob/master/LICENSE)
+La [BSD 3-clause](https://github.com/hhh0pE/decimal/blob/master/LICENSE)

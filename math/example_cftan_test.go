@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/math"
+	"github.com/hhh0pE/decimal/math"
 )
 
 type tanGenerator struct {

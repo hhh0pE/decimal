@@ -2,7 +2,7 @@ package math
 
 import (
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/misc"
+	"github.com/hhh0pE/decimal/misc"
 )
 
 // Asin returns the arcsine, in radians, of x.

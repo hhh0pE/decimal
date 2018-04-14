@@ -5,7 +5,7 @@ import (
 	"math/bits"
 
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/misc"
+	"github.com/hhh0pE/decimal/misc"
 )
 
 func newDecimal(s string) *decimal.Big {

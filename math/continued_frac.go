@@ -36,7 +36,7 @@ type Generator interface {
 
 // Contexter allows Generators to provide a different Context than z's. It's
 // intended to be analogous to the relationship between, for example,
-// Context.Mul and Big.Mul.
+// Context.mul and Big.mul.
 type Contexter interface {
 	Context() decimal.Context
 }
@@ -223,7 +223,7 @@ func Lentz(z *decimal.Big, g Generator) *decimal.Big {
 
 		// Set D_j = b_j + a_j*D{_j-1}
 		// Reuse D for the multiplication.
-		ctx.FMA(D, t.A, D, t.B) // D.Add(t.B, D.Mul(t.A, D))
+		ctx.FMA(D, t.A, D, t.B) // D.Add(t.B, D.mul(t.A, D))
 
 		// If D_j = 0, set D_j = tiny
 		if D.Sign() == 0 {

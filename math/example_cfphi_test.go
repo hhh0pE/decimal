@@ -5,7 +5,7 @@ import (
 	gmath "math"
 
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/math"
+	"github.com/hhh0pE/decimal/math"
 )
 
 var one = new(decimal.Big).SetUint64(1)

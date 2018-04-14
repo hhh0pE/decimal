@@ -5,8 +5,8 @@ import (
 	"math/big"
 
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/internal/arith"
-	"github.com/ericlagergren/decimal/internal/c"
+	"github.com/hhh0pE/decimal/internal/arith"
+	"github.com/hhh0pE/decimal/internal/c"
 )
 
 var (
@@ -325,7 +325,7 @@ func Shift(z, x *decimal.Big, shift int) *decimal.Big {
 		zb.Quo(zb, arith.BigPow10(uint64(-shift))) // remove trailing N digits
 	} else {
 		zb.Rem(zb, arith.BigPow10(uint64(prec-shift))) // remove first N digits
-		zb.Mul(zb, arith.BigPow10(uint64(shift)))      // fill with zeros
+		zb.mul(zb, arith.BigPow10(uint64(shift)))      // fill with zeros
 	}
 	if x.Signbit() {
 		zb.Neg(zb)

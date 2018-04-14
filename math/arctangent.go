@@ -4,7 +4,7 @@ import (
 	stdMath "math"
 
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/misc"
+	"github.com/hhh0pE/decimal/misc"
 )
 
 var sqrt3_3 = decimal.New(577350, 6) // sqrt(3) / 3

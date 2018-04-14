@@ -70,7 +70,7 @@
 //
 // Method naming is the same as math/big's, meaning:
 //
-//     func (z *T) SetV(v V) *T          // z = v
+//     func (z *T) SetV(v Decimal) *T          // z = v
 //     func (z *T) Unary(x *T) *T        // z = unary x
 //     func (z *T) Binary(x, y *T) *T    // z = x binary y
 //     func (x *T) Pred() P              // p = pred(x)

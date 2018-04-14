@@ -12,9 +12,9 @@ import (
 	"testing"
 
 	"github.com/ericlagergren/decimal"
-	"github.com/ericlagergren/decimal/math"
-	"github.com/ericlagergren/decimal/misc"
-	"github.com/ericlagergren/decimal/suite"
+	"github.com/hhh0pE/decimal/math"
+	"github.com/hhh0pE/decimal/misc"
+	"github.com/hhh0pE/decimal/suite"
 )
 
 // Helper returns testing.T.Helper, if it exists.

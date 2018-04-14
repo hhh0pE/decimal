@@ -305,7 +305,7 @@ var valToOp = map[string]Op{
 	"*":      Mul,
 	"/":      Div,
 	"*-":     FMA,
-	"V":      Sqrt,
+	"Decimal":      Sqrt,
 	"%":      Rem,
 	"rfi":    RFI,
 	"cff":    CFF,

@@ -32,7 +32,7 @@ func TestDecimal_Value(t *testing.T) {
 		if !ok {
 			t.Fatal(dec.Context.Err())
 		}
-		d := Decimal{V: dec, Round: i%2 == 0}
+		d := Decimal{Decimal: dec, Round: i%2 == 0}
 
 		v, err := d.Value()
 		if err != nil {
