@@ -15,6 +15,14 @@ type Decimal struct {
 	b Big
 }
 
+func (d *Decimal) UnmarshalJSON(data []byte) error {
+	return d.b.UnmarshalText(data)
+}
+
+func (d Decimal) MarshalJSON() ([]byte, error) {
+	return d.b.MarshalText()
+}
+
 func(d Decimal) String() string {
 	//if d.b == nil {
 	//	return "0"
@@ -120,6 +128,7 @@ func(d *Decimal) UnmarshalText(data []byte) error {
 	//checkValue(d)
 	return d.b.UnmarshalText(data)
 }
+
 
 func(d *Decimal) Precision() int {
 	//checkValue(d)
