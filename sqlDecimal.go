@@ -59,13 +59,13 @@ func (d Decimal) Value() (driver.Value, error) {
 
 // Scan implements sql.Scanner.
 func (d *Decimal) Scan(val interface{}) error {
-	//log.Println("Decimal.Scan")
-	//Logger.Debug("Decimal.Scan", zap.Reflect("d", d), zap.Stringer("d", d), zap.Reflect("val", val), zap.Stringer("val", reflect.TypeOf(val)))
 	if d == nil {
 		d = new(Decimal)
 	}
 	//checkValue(d)
 	switch t := val.(type) {
+	case Decimal:
+		*d = t
 	case string:
 		if _, ok := d.b.SetString(t); !ok {
 			if err := d.b.Context.Err(); err != nil {
@@ -79,6 +79,7 @@ func (d *Decimal) Scan(val interface{}) error {
 	default:
 		return fmt.Errorf("Decimal.Scan: unknown value: %#v", val)
 	}
+	return nil
 }
 
 
@@ -89,6 +90,7 @@ type NullDecimal struct {
 
 // Scan implements the Scanner interface.
 func (n *NullDecimal) Scan(value interface{}) error {
+	//log.Println("NullDecimal.Scan", value)
 	if value == nil {
 		n.Valid = false
 		return nil
@@ -109,5 +111,16 @@ func (n NullDecimal) Value() (driver.Value, error) {
 	return n.Decimal.Value()
 }
 
+func (d *NullDecimal) UnmarshalJSON(data []byte) error {
+	if string(data) == "null" {
+		d.Valid = false
+		return nil
+	}
+	//log.Println("NullDecimal.UnmarshalJSON", data, string(data))
+	return d.b.UnmarshalText(data)
+}
 
+func (d NullDecimal) MarshalJSON() ([]byte, error) {
+	return d.b.MarshalText()
+}
 
