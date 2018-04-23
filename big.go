@@ -1388,7 +1388,7 @@ func (x *Big) String() string {
 		e = sciE[x.Context.OperatingMode]
 	)
 	b.Grow(x.Precision())
-	f.format(x, normal, e)
+	f.format(x, plain, e)
 	return b.String()
 }
 

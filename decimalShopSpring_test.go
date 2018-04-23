@@ -45,3 +45,14 @@ func TestDivRem(t *testing.T) {
 	}
 
 }
+
+func TestToString(t *testing.T) {
+	var d1 = NewFromFloat(0.00000001)
+	var d2, _ = NewFromString("0.00000001")
+
+	d1.b.Context.MaxScale = 20
+	fmt.Println(d1.b.Context.RoundingMode)
+	d1.b.String()
+	fmt.Println(d1)
+	fmt.Println(d2)
+}
