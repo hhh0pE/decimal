@@ -11,6 +11,11 @@ func init() {
 	ContextUnlimited.OperatingMode = Go
 }
 
+var zeroDecimal Decimal
+func Zero() Decimal {
+	return zeroDecimal
+}
+
 type Decimal struct {
 	b Big
 }
@@ -90,7 +95,16 @@ func(d Decimal) IsZero() bool {
 	//if d.b == nil {
 	//	return true
 	//}
-	return d.b.exp == 0 && d.b.precision == 0
+	if d.b.exp == 0 && d.b.precision == 0 {
+		return true
+	}
+	if d.b.precision < 20 && d.b.compact == 0 {
+		return true
+	}
+	if d.b.precision >= 20 && d.b.unscaled.Int64() == 0 {
+		return true
+	}
+	return false
 	//fmt.Println("isZero", d.b.exp, d.b.precision, d.b.Scale())
 	//if val, isFit := d.b.Int64(); val == 0 && isFit {
 	//	return true
