@@ -35,3 +35,13 @@ func TestDecimalIsZero(t *testing.T) {
 		t.Error("!")
 	}
 }
+
+func TestDivRem(t *testing.T) {
+
+	//var rest Decimal
+	var b = NewFromFloat(30)
+	if !b.Modulo(NewFromFloat(10)).IsZero() {
+		t.Error("!")
+	}
+
+}
