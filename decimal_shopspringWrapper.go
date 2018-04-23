@@ -173,8 +173,12 @@ func NewFromString(str string) (Decimal, error) {
 }
 
 func NewFromFloat(f float64) Decimal {
+	//bigFloat := big.NewFloat(f)
 	d := NewDecimal()
 	d.b.SetFloat64(f)
+	//Context64.Round(&d.b)
+	d.b.Reduce()
+	//Context64.Reduce(&d.b)
 	return d
 }
 
