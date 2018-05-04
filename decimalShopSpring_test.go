@@ -56,3 +56,10 @@ func TestToString(t *testing.T) {
 	fmt.Println(d1)
 	fmt.Println(d2)
 }
+
+func TestSqlValue(t *testing.T) {
+	var d, _ = NewFromString("0.001313")
+	fmt.Println(d)
+	fmt.Println(d.Value())
+	fmt.Println(d.IsZero())
+}

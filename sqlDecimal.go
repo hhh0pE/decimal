@@ -37,7 +37,6 @@ func (e LengthError) Error() string {
 func (d Decimal) Value() (driver.Value, error) {
 	//Logger.Debug("Decimal.Value", zap.Reflect("d", d), zap.Stringer("d", d))
 	//checkValue(d)
-	//log.Println("Decimal.Value")
 	if d.b.IsNaN(0) {
 		return "NaN", nil
 	}

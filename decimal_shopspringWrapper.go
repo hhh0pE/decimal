@@ -26,17 +26,17 @@ func (d *Decimal) UnmarshalJSON(data []byte) error {
 	}
 
 	if len(data) == 0 {
-		d.b.SetFloat64(0)
-		return nil
+		return d.b.UnmarshalText([]byte(`0`))
 	}
 
 	return d.b.UnmarshalText(data)
 }
 
 func (d Decimal) MarshalJSON() ([]byte, error) {
-	bytes, err := d.b.MarshalText()
-	bytes = append([]byte(`"`), append(bytes, '"')...)
-	return bytes, err
+	//bytes, err := d.b.MarshalText()
+	//bytes = append([]byte(`"`), append(bytes, '"')...)
+	//return bytes, err
+	return d.b.MarshalText()
 }
 
 func(d Decimal) String() string {
@@ -106,12 +106,9 @@ func(d Decimal) Modulo(d2 Decimal) Decimal {
 	return Decimal{*d.b.Rem(&d.b, &d2.b)}
 }
 
-func(d Decimal) IsZero() bool {
-	//if d.b == nil {
-	//	return true
-	//}
-	return d.Equal(Zero())
-}
+//func(d Decimal) IsZero() bool {
+//	return d.Equal(Zero())
+//}
 
 func(d Decimal) StringFixed(places int) string {
 	//checkValue(&d)
