@@ -21,11 +21,22 @@ type Decimal struct {
 }
 
 func (d *Decimal) UnmarshalJSON(data []byte) error {
+	if data[0] == '"' && data[len(data)-1] == '"' {
+		data = data[1:len(data)-1]
+	}
+
+	if len(data) == 0 {
+		d.b.SetFloat64(0)
+		return nil
+	}
+
 	return d.b.UnmarshalText(data)
 }
 
 func (d Decimal) MarshalJSON() ([]byte, error) {
-	return d.b.MarshalText()
+	bytes, err := d.b.MarshalText()
+	bytes = append([]byte(`"`), append(bytes, '"')...)
+	return bytes, err
 }
 
 func(d Decimal) String() string {
